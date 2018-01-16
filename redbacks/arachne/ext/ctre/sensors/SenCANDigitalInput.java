@@ -1,6 +1,9 @@
 package redbacks.arachne.ext.ctre.sensors;
 
-import redbacks.arachne.ext.ctre.controllers.CANTalon;
+import static com.ctre.phoenix.motorcontrol.LimitSwitchNormal.NormallyOpen;
+import static com.ctre.phoenix.motorcontrol.LimitSwitchSource.FeedbackConnector;
+
+import redbacks.arachne.ext.ctre.controllers.CtrlCANTalon;
 import redbacks.arachne.lib.motors.CtrlMotor;
 import redbacks.arachne.lib.sensors.BinarySensor;
 
@@ -11,7 +14,7 @@ import redbacks.arachne.lib.sensors.BinarySensor;
  */
 public class SenCANDigitalInput extends BinarySensor
 {
-	private final CANTalon talon;
+	private final CtrlCANTalon talon;
 	private final boolean isForwardSwitch;
 
 	/**
@@ -20,9 +23,11 @@ public class SenCANDigitalInput extends BinarySensor
 	 * @param talon The controller the sensor is attached to.
 	 * @param isForwardSwitch Whether the sensor is attached to the forward switch ports on the controller.
 	 */
-	public SenCANDigitalInput(CANTalon talon, boolean isForwardSwitch) {
+	public SenCANDigitalInput(CtrlCANTalon talon, boolean isForwardSwitch) {
 		this.talon = talon;
 		this.isForwardSwitch = isForwardSwitch;
+		if(isForwardSwitch) this.talon.configForwardLimitSwitchSource(FeedbackConnector, NormallyOpen, 0);
+		else this.talon.configReverseLimitSwitchSource(FeedbackConnector, NormallyOpen, 0);
 	}
 
 	/**
@@ -32,11 +37,12 @@ public class SenCANDigitalInput extends BinarySensor
 	 * @param isForwardSwitch Whether the sensor is attached to the forward switch ports on the controller.
 	 */
 	public SenCANDigitalInput(CtrlMotor talon, boolean isForwardSwitch) {
-		this.talon = (CANTalon) talon.controller;
+		this.talon = (CtrlCANTalon) talon.controller;
 		this.isForwardSwitch = isForwardSwitch;
 	}
 
 	public boolean getSenVal() {
-		return isForwardSwitch ? talon.isFwdLimitSwitchClosed() : talon.isRevLimitSwitchClosed();
+		//FIXME This will break robots, until we figure out limit switches.
+		return false;//isForwardSwitch ? talon.getSelectedSensorPosition(pidIdx)isFwdLimitSwitchClosed() : talon.isRevLimitSwitchClosed();
 	}
 }

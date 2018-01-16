@@ -1,6 +1,8 @@
 package redbacks.arachne.ext.ctre.sensors;
 
-import redbacks.arachne.ext.ctre.controllers.CANTalon;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+
+import redbacks.arachne.ext.ctre.controllers.CtrlCANTalon;
 import redbacks.arachne.lib.motors.CtrlMotor;
 import redbacks.arachne.lib.sensors.NumericSensor;
 
@@ -11,10 +13,11 @@ import redbacks.arachne.lib.sensors.NumericSensor;
  */
 public abstract class SenCANEncoder extends NumericSensor
 {
-	final CANTalon talon;
+	final CtrlCANTalon talon;
 
-	private SenCANEncoder(CANTalon talon) {
+	private SenCANEncoder(CtrlCANTalon talon) {
 		this.talon = talon;
+		this.talon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 	}
 
 	/**
@@ -29,7 +32,7 @@ public abstract class SenCANEncoder extends NumericSensor
 		 * 
 		 * @param talon The controller the encoder is attached to.
 		 */
-		public Rate(CANTalon talon) {
+		public Rate(CtrlCANTalon talon) {
 			super(talon);
 		}
 		
@@ -39,11 +42,11 @@ public abstract class SenCANEncoder extends NumericSensor
 		 * @param talon The {@link CtrlMotor} instance holding the controller the encoder is attached to.
 		 */
 		public Rate(CtrlMotor talon) {
-			super((CANTalon) talon.controller);
+			super((CtrlCANTalon) talon.controller);
 		}
 		
 		protected double getSenVal() {
-			return talon.getEncVelocity();
+			return talon.getSelectedSensorVelocity(0);
 		}
 		
 		public double pidGet() {
@@ -63,7 +66,7 @@ public abstract class SenCANEncoder extends NumericSensor
 		 * 
 		 * @param talon The controller the encoder is attached to.
 		 */
-		public Displacement(CANTalon talon) {
+		public Displacement(CtrlCANTalon talon) {
 			super(talon);
 		}
 		
@@ -73,11 +76,11 @@ public abstract class SenCANEncoder extends NumericSensor
 		 * @param talon The {@link CtrlMotor} instance holding the controller the encoder is attached to.
 		 */
 		public Displacement(CtrlMotor talon) {
-			super((CANTalon) talon.controller);
+			super((CtrlCANTalon) talon.controller);
 		}
 		
 		protected double getSenVal() {
-			return talon.getEncPosition();
+			return talon.getSelectedSensorPosition(0);
 		}
 		
 		public double pidGet() {

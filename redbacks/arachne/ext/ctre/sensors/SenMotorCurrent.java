@@ -1,6 +1,6 @@
 package redbacks.arachne.ext.ctre.sensors;
 
-import redbacks.arachne.ext.ctre.controllers.CANTalon;
+import redbacks.arachne.ext.ctre.controllers.CtrlCANTalon;
 import redbacks.arachne.lib.motors.CtrlMotor;
 import redbacks.arachne.lib.sensors.NumericSensor;
 
@@ -11,14 +11,14 @@ import redbacks.arachne.lib.sensors.NumericSensor;
  */
 public class SenMotorCurrent extends NumericSensor
 {
-	CANTalon talon;
+	CtrlCANTalon talon;
 	
 	/**
 	 * Constructor for a sensor measuring the current passing through a Talon SRX CAN controller.
 	 *
 	 * @param talon The controller being measured.
 	 */
-	public SenMotorCurrent(CANTalon talon) {
+	public SenMotorCurrent(CtrlCANTalon talon) {
 		this.talon = talon;
 	}
 	
@@ -28,7 +28,7 @@ public class SenMotorCurrent extends NumericSensor
 	 * @param talon The {@link CtrlMotor} instance holding the controller being measured.
 	 */
 	public SenMotorCurrent(CtrlMotor talon) {
-		this.talon = (CANTalon) talon.controller;
+		this.talon = (CtrlCANTalon) talon.controller;
 	}
 	
 	public double getSenVal() {
