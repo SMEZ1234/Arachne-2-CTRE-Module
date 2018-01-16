@@ -1,7 +1,5 @@
 package redbacks.arachne.ext.ctre.sensors;
 
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
-
 import redbacks.arachne.ext.ctre.controllers.CtrlCANTalon;
 import redbacks.arachne.lib.motors.CtrlMotor;
 import redbacks.arachne.lib.sensors.NumericSensor;
@@ -17,7 +15,6 @@ public abstract class SenCANEncoder extends NumericSensor
 
 	private SenCANEncoder(CtrlCANTalon talon) {
 		this.talon = talon;
-		this.talon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 	}
 
 	/**
@@ -46,7 +43,7 @@ public abstract class SenCANEncoder extends NumericSensor
 		}
 		
 		protected double getSenVal() {
-			return talon.getSelectedSensorVelocity(0);
+			return talon.getSensorCollection().getQuadratureVelocity();
 		}
 		
 		public double pidGet() {
@@ -80,7 +77,7 @@ public abstract class SenCANEncoder extends NumericSensor
 		}
 		
 		protected double getSenVal() {
-			return talon.getSelectedSensorPosition(0);
+			return talon.getSensorCollection().getQuadraturePosition();
 		}
 		
 		public double pidGet() {
