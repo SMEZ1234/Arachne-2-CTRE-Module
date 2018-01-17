@@ -42,7 +42,6 @@ public class SenCANDigitalInput extends BinarySensor
 	}
 
 	public boolean getSenVal() {
-		//FIXME This will break robots, until we figure out limit switches.
 		return isForwardSwitch ? talon.getSensorCollection().isFwdLimitSwitchClosed() : talon.getSensorCollection().isRevLimitSwitchClosed();
 	}
 }

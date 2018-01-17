@@ -5,7 +5,10 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.SpeedController;
 
 /**
- * DOC Talon class
+ * A TalonSRX motor controller that can be used by Arachne classes.
+ * Currently identical to {@link WPI_TalonSRX}. This class exists to:
+ * a) Make it clear to Arachne users that this controller should be used instead of TalonSRX, as the SpeedController interface is required
+ * b) Allow us to make further modifications to standard Talon SRX behaviour should the CTRE libraries change again.
  * 
  * @author Sean Zammit
  */
