@@ -2,8 +2,6 @@ package redbacks.arachne.ext.ctre.controllers;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-import edu.wpi.first.wpilibj.SpeedController;
-
 /**
  * A TalonSRX motor controller that can be used by Arachne classes.
  * Currently identical to {@link WPI_TalonSRX}. This class exists to:
@@ -12,7 +10,7 @@ import edu.wpi.first.wpilibj.SpeedController;
  * 
  * @author Sean Zammit
  */
-public class CtrlCANTalon extends WPI_TalonSRX implements SpeedController
+public class CtrlCANTalon extends WPI_TalonSRX
 {
 	public CtrlCANTalon(int deviceNumber) {
 		super(deviceNumber);
