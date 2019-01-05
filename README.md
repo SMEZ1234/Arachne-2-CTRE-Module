@@ -8,4 +8,4 @@ This module contains all classes built on the [CTRE libraries](http://www.ctr-el
 
 It also requires the [core Arachne library](https://github.com/Team4613-BarkerRedbacks/Arachne/releases).
 
-RELEASE VERSION: Arachne 2.1.0 (2018)
+RELEASE VERSION: Arachne 2.2.0-alpha (2018)
